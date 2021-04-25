@@ -14,6 +14,7 @@ export default ({ location }) => {
   const isLoading = useSelector((state) => isSearchLoading(state));
   const [isLooked, setIsLooked] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const { movieName } = queryString.parse(location.search);
     if (movieName && !isLooked) {

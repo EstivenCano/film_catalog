@@ -1,3 +1,4 @@
 import MovieIcon from "./MovieIcon";
+import SearchIcon from "./SearchIcon"
 
-export { MovieIcon };
+export { MovieIcon, SearchIcon };

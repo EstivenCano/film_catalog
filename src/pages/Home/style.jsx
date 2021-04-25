@@ -8,19 +8,21 @@ const centeredStyleObj = {
 
 export default makeStyles({
   container: {
-    height: "100vh",
+    marginLeft: 0,
+    marginInline: 0,
+    padding: 0,
     flexDirection: "column",
     ...centeredStyleObj,
   },
   cardContainer: {
     flexDirection: "column",
-    width: 400,
-    height: 200,
-    padding: "2rem",
+    marginLeft: 0,
+    height: 120,
+    padding: ".1rem",
     ...centeredStyleObj,
   },
   title: {
-    fontSize: "4rem",
+    fontSize: "2rem",
   },
   titleGridContainer: {
     ...centeredStyleObj,
@@ -37,4 +39,22 @@ export default makeStyles({
   movieIcon: {
     fontSize: "4rem",
   },
+  gridContainer: {
+    height: '100vh'
+  }, 
+  lateralCard: {
+    display: 'flex', 
+    flexDirection: 'column',
+    alignItems:'center',
+    marginTop: 0,
+    justifyContent: 'flex-start',
+    padding: 10,
+    height: '100vh',
+  },
+  searchGrid : {
+    ...centeredStyleObj,
+    width: "100%",
+    paddingInline: '50px'
+  }
 });
+
