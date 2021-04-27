@@ -1,20 +1,25 @@
 import React, { useState } from "react";
-import { Typography, Card, Grid, TextField, Button } from "@material-ui/core";
-
+import {
+  Typography,
+  Card,
+  Grid,
+  TextField,
+  Button,
+  Hidden,
+  IconButton
+} from "@material-ui/core";
 import { MovieIcon, SearchIcon } from "../../icons";
 import { ReactComponent as VideoGrapher } from "../../icons/videographer.svg";
 
-import styles from "./style";
+import useStyles from "./style";
 import NestedList from "./list";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({ history }) => {
   const [searchText, setSearchText] = useState("");
-  const classes = styles();
-
+  const classes = useStyles();
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
-
   const handleClearTextClick = (event) => {
     setSearchText("");
   };
@@ -24,21 +29,26 @@ export default ({ history }) => {
 
   return (
     <Grid container>
-      <Grid className={classes.gridContainer} item xs={2}>
-        <Card className={classes.lateralCard}>
-          <Grid justify="center">
-            <VideoGrapher width="10vw" height="15vh" />
-            <Typography variant="h4" color="primary">
-              Film Catalog
-            </Typography>
-          </Grid>
-          <NestedList />
-        </Card>
-      </Grid>
-      <Grid item xs={10}>
+      <Hidden smDown>
+        <Grid className={classes.gridContainer} item sm={2} md={2}>
+          <Card className={classes.lateralCard}>
+            <Grid justify="center">
+              <VideoGrapher width="10vw" height="15vh" />
+              <Typography variant="h4" color="primary">
+                Film Catalog
+              </Typography>
+            </Grid>
+            <NestedList />
+          </Card>
+        </Grid>
+      </Hidden>
+      <Grid item xs={12} sm={12} md={10}>
         <Card className={classes.cardContainer}>
           <Grid container className={classes.titleGridContainer}>
             <Grid className={classes.searchGrid}>
+              <IconButton aria-label="delete">
+                <MovieIcon />
+              </IconButton>
               <TextField
                 className={classes.textFieldSearch}
                 value={searchText}
@@ -51,7 +61,6 @@ export default ({ history }) => {
                   variant="contained"
                   color="primary"
                   startIcon={<SearchIcon />}
-                  size="large"
                   onClick={handleSearchTextClick}
                 >
                   Search
