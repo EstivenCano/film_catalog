@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column"
   },
   title: {
-    fontSize: "2rem",
+    fontSize: "2vw",
   },
   titleGridContainer: {
     ...centeredStyleObj,

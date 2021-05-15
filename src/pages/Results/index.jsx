@@ -19,12 +19,11 @@ export default ({ location }) => {
     const { movieName } = queryString.parse(location.search);
     if (movieName && !isLooked) {
       setIsLooked(true)
-      dispatch(searchMovie({ movieName }));
+      dispatch(searchMovie({ movieName })); 
     }
   });
 
   const renderMovies = () => {
-    console.log(movies);
     if (movies) {
       return movies.map((value, index) => (
         <MovieResult key={index} {...value} />

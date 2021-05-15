@@ -13,16 +13,19 @@ import { ReactComponent as VideoGrapher } from "../../icons/videographer.svg";
 
 import useStyles from "./style";
 import NestedList from "./list";
+import ByCategory from "./category"
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({ history }) => {
   const [searchText, setSearchText] = useState("");
   const classes = useStyles();
+
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
-  const handleClearTextClick = (event) => {
+  /*const handleClearTextClick = (event) => {
     setSearchText("");
-  };
+  };*/
   const handleSearchTextClick = (event) => {
     history.push(`/results?movieName=${searchText}`);
   };
@@ -33,8 +36,8 @@ export default ({ history }) => {
         <Grid className={classes.gridContainer} item sm={2} md={2}>
           <Card className={classes.lateralCard}>
             <Grid justify="center">
-              <VideoGrapher width="10vw" height="15vh" />
-              <Typography variant="h4" color="primary">
+              <VideoGrapher width="12vw" height="15vh" />
+              <Typography className={classes.title} variant="h4" color="primary">
                 Film Catalog
               </Typography>
             </Grid>
@@ -69,6 +72,7 @@ export default ({ history }) => {
             </Grid>
           </Grid>
         </Card>
+        <ByCategory category="top_rated"/>
       </Grid>
     </Grid>
   );
