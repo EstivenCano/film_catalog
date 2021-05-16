@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column"
   },
   title: {
-    fontSize: "2rem",
+    fontSize: "2vw",
   },
   titleGridContainer: {
     ...centeredStyleObj,
@@ -39,7 +39,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "4rem",
   },
   gridContainer: {
-    height: "100vh",
+   display: "flex",
+   flexDirection: "column"
+  },
+  principalContainer:{
+    height: "100%"
   },
   lateralCard: {
     display: "flex",
@@ -48,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     justifyContent: "flex-start",
     padding: 10,
-    height: "100vh",
+    height: "100%",
   },
   searchGrid: {
     ...centeredStyleObj,
