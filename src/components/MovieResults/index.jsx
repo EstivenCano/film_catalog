@@ -15,7 +15,6 @@ const MovieResult = ({
   history,
 }) => {
   const classes = style();
-
   const poster = `https://image.tmdb.org/t/p/w500${poster_path}`;
   const handleSeeMovieClick = () => {
     history.push(`/movie/${id}`);
