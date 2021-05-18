@@ -16,7 +16,7 @@ export default ({ match }) => {
     if (!movieResult || (movieResult && movieResult.imbdID !== movieId)) {
       dispatch(searchMovieById({ movieId }));
     }
-  }, []);
+  });
 
   if (!movieResult) {
     return <CircularProgress size={100} color="primary" />;
