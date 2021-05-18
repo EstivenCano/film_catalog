@@ -5,10 +5,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import LandscapeIcon from '@material-ui/icons/Landscape';
@@ -52,66 +48,55 @@ export default function NestedList() {
     >
       <ListItem button>
         <ListItemIcon>
-          <SportsKabaddiIcon />
+          <SportsKabaddiIcon color='primary' />
         </ListItemIcon>
         <ListItemText primary="Action" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <LandscapeIcon />
+          <LandscapeIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Adventure" />
       </ListItem>
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
-          <GestureIcon />
+          <GestureIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Anime" />
-        {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
-        </List>
-      </Collapse>
       <ListItem button>
         <ListItemIcon>
-          <FilterDramaIcon />
+          <FilterDramaIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Drama" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <FlightTakeoffIcon />
+          <FlightTakeoffIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Fiction" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <MoodBadIcon />
+          <MoodBadIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Thriller" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <FaceIcon />
+          <FaceIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Horror" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <SentimentVerySatisfiedIcon />
+          <SentimentVerySatisfiedIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Comedy" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <FavoriteIcon />
+          <FavoriteIcon color='primary'/>
         </ListItemIcon>
         <ListItemText primary="Romance" />
       </ListItem>

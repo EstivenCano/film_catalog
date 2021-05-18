@@ -8,12 +8,14 @@ import {
   Hidden,
   IconButton,
 } from "@material-ui/core";
-import { MovieIcon, SearchIcon } from "../../icons";
+import { SearchIcon } from "../../icons";
+import MenuIcon from "@material-ui/icons/Menu";
+
 import { ReactComponent as VideoGrapher } from "../../icons/videographer.svg";
 
 import useStyles from "./style";
 import NestedList from "./list";
-import ByCategory from "./category";
+import ByCategory from "../../components/ByCategory";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({ history }) => {
@@ -35,7 +37,7 @@ export default ({ history }) => {
       <Hidden smDown>
         <Grid className={classes.gridContainer} item sm={2} md={2}>
           <Card className={classes.lateralCard}>
-            <Grid justify="center">
+            <Grid>
               <VideoGrapher width="12vw" height="15vh" />
               <Typography
                 className={classes.title}
@@ -53,8 +55,8 @@ export default ({ history }) => {
         <Card className={classes.cardContainer}>
           <Grid container className={classes.titleGridContainer}>
             <Grid className={classes.searchGrid}>
-              <IconButton aria-label="delete">
-                <MovieIcon />
+              <IconButton aria-label="menu">
+                <MenuIcon />
               </IconButton>
               <TextField
                 className={classes.textFieldSearch}
@@ -62,26 +64,34 @@ export default ({ history }) => {
                 placeholder="Search a movie..."
                 onChange={handleSearchTextChange}
               />
-              <Grid className={classes.buttonsContainer}>
-                <Button
-                  className={classes.searchButton}
-                  variant="contained"
-                  color="primary"
-                  startIcon={<SearchIcon />}
-                  onClick={handleSearchTextClick}
-                >
-                  Search
-                </Button>
-              </Grid>
+              <Button
+                className={classes.searchButton}
+                variant="contained"
+                color="primary"
+                size='small'
+                startIcon={<SearchIcon />}
+                onClick={handleSearchTextClick}
+              >
+                <Hidden smDown>Search</Hidden>
+              </Button>
             </Grid>
           </Grid>
         </Card>
-        <Card>
+        <Card className={classes.moviesCard}>
           <br />
+          <Typography className={classes.title} variant="h4" color="primary">
+            Popular
+          </Typography>
           <ByCategory category="popular" />
           <br />
-          <ByCategory category="upcoming" />
+          <Typography className={classes.title} variant="h4" color="primary">
+            Now playing
+          </Typography>
+          <ByCategory category="now_playing" />
           <br />
+          <Typography className={classes.title} variant="h4" color="primary">
+            Top rated
+          </Typography>
           <ByCategory category="top_rated" />
           <br />
         </Card>

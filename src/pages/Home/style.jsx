@@ -9,19 +9,23 @@ const centeredStyleObj = {
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: 0,
-    
     flexDirection: "column",
     ...centeredStyleObj,
   },
   cardContainer: {
     ...centeredStyleObj,
     [theme.breakpoints.up("sm")]:{
-      paddingBlock: 30
+      paddingBlock: 30,
+      height: '5vh',
     },
-    flexDirection: "column"
+    height: '10vh',
+    flexDirection: "column",
   },
   title: {
-    fontSize: "2vw",
+    fontSize: "25px",
+    fontWeight: '500', 
+    lineHeight: '40px',
+    textAlign: 'center'
   },
   titleGridContainer: {
     ...centeredStyleObj,
@@ -40,10 +44,24 @@ const useStyles = makeStyles((theme) => ({
   },
   gridContainer: {
    display: "flex",
-   flexDirection: "column"
+   flexDirection: "column",
   },
   principalContainer:{
     height: "100%"
+  },
+  moviesCard:{
+    overflowY: 'scroll',
+    height: '85vh',
+    paddingInline: '10px',
+    '&::-webkit-scrollbar': {
+      width: '0.5em'
+    },
+    '&::-webkit-scrollbar-track': {
+      background: "#f0efff"
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#3f51b5',
+    },
   },
   lateralCard: {
     display: "flex",
