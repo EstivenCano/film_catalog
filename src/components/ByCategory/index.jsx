@@ -6,20 +6,28 @@ import {
   GridListTileBar,
   IconButton,
 } from "@material-ui/core";
+import MovieDetail from "../../pages/MovieDetail";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import useStyles from "./style";
-
 import axios from "axios";
-
 
 // eslint-disable-next-line import/no-anonymous-default-export
 const ByCategory = (props) => {
-  const [movies, setMovies] = useState();
   const img = "https://image.tmdb.org/t/p/w500";
   const apiKey = process.env.REACT_APP_API_KEY;
   const classes = useStyles();
+  const [movies, setMovies] = useState();
   const [isBusy, setIsBusy] = useState(false);
   const [cols, setCols] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [movieId, setMovieId] = useState();
+
+  const handleAddClick = () => {
+    setIsOpen(true);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   async function getMovies() {
     setIsBusy(true);
@@ -83,6 +91,10 @@ const ByCategory = (props) => {
                       <IconButton
                         aria-label={`open ${movies.title} details`}
                         color="secondary"
+                        onClick={() => {
+                          handleAddClick();
+                          setMovieId(movie.id);
+                        }}
                       >
                         <OpenInNewIcon className={classes.title} />
                       </IconButton>
@@ -97,6 +109,15 @@ const ByCategory = (props) => {
         </div>
       ) : (
         <CircularProgress color="secondary" />
+      )}
+      {isOpen ? (
+        <MovieDetail
+          isOpen={isOpen}
+          handleClose={handleClose}
+          movieId={movieId}
+        />
+      ) : (
+        <></>
       )}
     </>
   );

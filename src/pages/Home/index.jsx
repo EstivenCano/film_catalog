@@ -27,7 +27,6 @@ export default ({ history }) => {
   const [searchText, setSearchText] = useState("");
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const drawerWidth = 240;
 
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
@@ -54,7 +53,7 @@ export default ({ history }) => {
         className={clsx(classes.AppBar, {
           [classes.appBarShift]: open,
         })}
-        color="white"
+        color="inherit"
       >
         <Toolbar>
           {!open ? (
