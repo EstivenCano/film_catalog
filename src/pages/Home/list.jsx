@@ -6,7 +6,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Drawer,
 } from "@material-ui/core";
 
 import SportsKabaddiIcon from "@material-ui/icons/SportsKabaddi";
@@ -19,7 +18,6 @@ import FaceIcon from "@material-ui/icons/Face";
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
