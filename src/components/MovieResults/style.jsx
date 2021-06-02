@@ -1,17 +1,32 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles({
-  cardContainer: {
-    marginTop: 8,
+export default makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    marginTop: "10px",
+    paddingInline: "10px",
+    backgroundColor: theme.palette.background.paper,
   },
-  poster: {
-    width: 130,
+  gridList: {
+    flexWrap: "nowrap",
+    "&::-webkit-scrollbar": {
+      width: "0.4em",
+      height: "0.6em",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "#f0efff",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#3f51b5",
+    },
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)",
   },
-  titlesContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 260,
-    padding: 10,
-    justifyContent:'space-between'
+  title: {
+    color: theme.palette.primary,
   },
-});
+  titleBar: {},
+}));
