@@ -1,9 +1,12 @@
-import React from "react";
-import { Card, Grid, Typography, Button, Box } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
-import { withRouter } from "react-router-dom";
-
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import IconButton from "@material-ui/core/IconButton";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import tileData from "./tileData";
 import style from "./style";
+
+
 
 const MovieResult = ({
   title,
@@ -12,58 +15,34 @@ const MovieResult = ({
   id,
   vote_average,
   vote_count,
-  history,
 }) => {
   const classes = style();
   const poster = `https://image.tmdb.org/t/p/w500${poster_path}`;
-  const handleSeeMovieClick = () => {
-    history.push(`/movie/${id}`);
-  };
+  const average = vote_average;
 
   return (
-    <Card className={classes.cardContainer}>
-      <Grid container>
-        <Grid item>
-          {poster_path !== null ? (
-            <img src={poster} alt={title} className={classes.poster} />
-          ) : (
-            <img
-              src={
-                "https://www.carnival.com/_ui/responsive/ccl/assets/images/notfound_placeholder.svg"
+    <div className={classes.root}>
+      <GridList className={classes.gridList} cols={2.5}>
+        {tileData.map((tile) => (
+          <GridListTile key={tile.img}>
+            <img src={tile.img} alt={tile.title} />
+            <GridListTileBar
+              title={tile.title}
+              classes={{
+                root: classes.titleBar,
+                title: classes.title,
+              }}
+              actionIcon={
+                <IconButton aria-label={`star ${tile.title}`}>
+                  <StarBorderIcon className={classes.title} />
+                </IconButton>
               }
-              alt={title}
-              className={classes.poster}
             />
-          )}
-        </Grid>
-        <Grid item className={classes.titlesContainer}>
-          <Typography>{title}</Typography>
-          <Typography>
-            <strong>Release date:</strong> {release_date}
-          </Typography>
-          <Box>
-            <Rating
-              name="customized-10"
-              defaultValue={vote_average}
-              max={10}
-              precision={0.1}
-              readOnly
-            />
-          </Box>
-          <Typography>
-            <strong>Vote count:</strong> {vote_count}
-          </Typography>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={handleSeeMovieClick}
-          >
-            VER MAS
-          </Button>
-        </Grid>
-      </Grid>
-    </Card>
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
   );
 };
 
-export default withRouter(MovieResult);
+export default MovieResult;

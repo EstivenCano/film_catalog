@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
       "&::-webkit-scrollbar-thumb": {
         backgroundColor: "#3f51b5",
       },
-    },
+    }
   },
   overview: {
     textAlign: 'justify'
@@ -80,10 +80,9 @@ const useStyles = makeStyles((theme) => ({
     right: 10
   },
   circularText:{
+    color: 'white',
     position:'absolute',
-    bottom: 28,
-    right: 20,
-    color: 'white'
+    bottom: 6,
   },
   genres:{
     display: 'flex',
@@ -113,6 +112,19 @@ const useStyles = makeStyles((theme) => ({
     position:'absolute',
     top: 0,
     left: 10
+  },
+  textDiv: {
+    position:'absolute',
+    display: 'flex',
+    flexDirection: 'row',
+    background: 'black',
+    borderRadius: '20px',
+    width: '34px',
+    height: '34px',
+    bottom: 23,
+    right: 13,
+    justifyContent: 'center', 
+    alignSelf: 'center'
   }
 }));
 
