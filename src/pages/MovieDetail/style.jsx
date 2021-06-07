@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       padding: theme.spacing(0),
       margin: "auto",
-      overflowY: "hidden",
+      overflowY: "hidden"
     },
     maxHeight: "90vh",
     overflowY: "scroll",
@@ -30,8 +30,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   root: {
+    [theme.breakpoints.down("sm")]:{
+      width: "450px",
+    },
     [theme.breakpoints.up("sm")]: {
-      width: "620px",
+      width: "800px",
     },
     display: "flex",
     alignItems: "center",

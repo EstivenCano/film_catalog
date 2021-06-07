@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import MovieDetail from "../../pages/MovieDetail";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
+import { motion } from "framer-motion";
 import useStyles from "./style";
 import axios from "axios";
 
@@ -80,7 +81,16 @@ const ByCategory = (props) => {
             <GridList className={classes.gridList} cols={cols}>
               {movies.map((movie) => (
                 <GridListTile key={movie.id} className={classes.image}>
-                  <img src={img + movie.poster_path} alt={movie.title} />
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <img
+                      src={img + movie.poster_path}
+                      alt={movie.title}
+                      width="100%"
+                    />
+                  </motion.div>
                   <GridListTileBar
                     title={movie.title}
                     classes={{
@@ -88,16 +98,21 @@ const ByCategory = (props) => {
                       title: classes.title,
                     }}
                     actionIcon={
-                      <IconButton
-                        aria-label={`open ${movies.title} details`}
-                        color="secondary"
-                        onClick={() => {
-                          handleAddClick();
-                          setMovieId(movie.id);
-                        }}
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                       >
-                        <OpenInNewIcon className={classes.title} />
-                      </IconButton>
+                        <IconButton
+                          aria-label={`open ${movies.title} details`}
+                          color="secondary"
+                          onClick={() => {
+                            handleAddClick();
+                            setMovieId(movie.id);
+                          }}
+                        >
+                          <OpenInNewIcon className={classes.title} />
+                        </IconButton>
+                      </motion.div>
                     }
                   />
                 </GridListTile>
@@ -108,7 +123,9 @@ const ByCategory = (props) => {
           )}
         </div>
       ) : (
-        <CircularProgress color="secondary" />
+        <div className={classes.root}>
+          <CircularProgress color="secondary" />
+        </div>
       )}
       {isOpen ? (
         <MovieDetail

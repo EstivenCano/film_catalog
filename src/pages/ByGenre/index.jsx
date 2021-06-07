@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import clsx from "clsx";
-import { useDispatch, useSelector } from "react-redux";
 import {
   CircularProgress,
   Grid,
@@ -9,42 +8,47 @@ import {
   GridListTileBar,
   IconButton,
 } from "@material-ui/core";
-import queryString from "query-string";
 import MovieDetail from "../../pages/MovieDetail";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-
-import { searchMovie } from "../../redux/actions/search";
-import { movieResults, isSearchLoading } from "../../redux/selectors";
 import { motion, AnimatePresence } from "framer-motion";
 import useStyles from "./style";
 import { OpenContext } from "../../components/Context";
+import { useParams, useHistory } from "react-router-dom";
+import axios from "axios";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({ location }) => {
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => movieResults(state));
-  const isLoading = useSelector((state) => isSearchLoading(state));
-  const [isLooked, setIsLooked] = useState(false);
+const ByGenre = () => {
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [cols, setCols] = useState(0);
   const [movieId, setMovieId] = useState();
   const classes = useStyles();
   const { value } = useContext(OpenContext);
   const [open] = value;
   const [isOpen, setIsOpen] = useState();
+  const [movies, setMovies] = useState();
+  const genre = useParams();
+  const history = useHistory();
+
+  async function getMovies() {
+    await axios
+      .get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genre.id}`
+      )
+      .then((movies) => {
+        setMovies(movies.data.results);
+      })
+      .catch((err) => {
+        console.log("Error" + err);
+      });
+  }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const { movieName } = queryString.parse(location.search);
-    if (movieName && !isLooked) {
+    /*if (!movies) {
+      getMovies();
       setCols(getViewport());
-      setIsLooked(true);
-      dispatch(searchMovie({ movieName }));
-    }
-    setIsLooked(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search]);
-
-  useEffect(() => {
+    }*/
+    console.log("Entro");
     window.addEventListener(
       "resize",
       function () {
@@ -52,7 +56,14 @@ export default ({ location }) => {
       },
       true
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   });
+
+  useEffect(() => {
+    getMovies();
+    setCols(getViewport());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history.location.pathname]);
 
   const handleAddClick = () => {
     setIsOpen(true);
@@ -86,7 +97,6 @@ export default ({ location }) => {
                     exit={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
-                    
                   >
                     <motion.div
                       whileHover={{ scale: 1.1 }}
@@ -137,14 +147,13 @@ export default ({ location }) => {
           </Grid>
         </AnimatePresence>
       );
-    } else if (isLoading) {
+    } else {
       return (
         <Grid className={classes.root}>
           <CircularProgress size={100} color="primary" />
         </Grid>
       );
     }
-    return <></>;
   };
   return (
     <Grid
@@ -165,3 +174,5 @@ export default ({ location }) => {
     </Grid>
   );
 };
+
+export default ByGenre;

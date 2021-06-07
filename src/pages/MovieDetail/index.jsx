@@ -21,13 +21,14 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import useStyles from "./style";
 import axios from "axios";
 
+
 // eslint-disable-next-line import/no-anonymous-default-export
 const MovieDetail = (props) => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const classes = useStyles();
   const [movieResult, setMovieResult] = useState({});
-  const poster = `https://image.tmdb.org/t/p/w500${movieResult.poster_path}`;
   const [isBusy, setIsBusy] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   async function getMovieById() {
     setIsBusy(true);
@@ -54,6 +55,20 @@ const MovieDetail = (props) => {
     getMovieById();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.isOpen]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) =>
+        prevProgress >= movieResult.vote_average * 10
+          ? movieResult.vote_average * 10
+          : prevProgress + 1
+      );
+    }, 10);
+    return () => {
+      clearInterval(timer);
+      setProgress(0)
+    };
+  }, [movieResult]);
 
   return (
     <>
@@ -91,7 +106,7 @@ const MovieDetail = (props) => {
                         variant="determinate"
                         color="secondary"
                         className={classes.circular}
-                        value={movieResult.vote_average * 10}
+                        value={progress}
                       />
                       <div className={classes.textDiv}>
                         <Typography
