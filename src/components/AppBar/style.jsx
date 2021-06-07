@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   hide: {
     display: 'none',
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
   },
   searchButton: {
-    marginLeft: "1rem",
+    marginLeft: ".5rem",
   },
   buttonsContainer: {
     marginTop: ".5rem",
@@ -140,6 +140,13 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+  },
+  textFieldDiv: {
+    display: 'flex', 
+    flexDirection: 'row',
+    height: '30px',
+    marginLeft: 'auto', 
+    alignItems: "center"
   }
 }));
 

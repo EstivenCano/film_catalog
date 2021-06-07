@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import clsx from "clsx";
 import {
   AppBar,
@@ -15,7 +15,7 @@ import {
 import { SearchIcon } from "../../icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import HomeIcon from '@material-ui/icons/Home';
+import HomeIcon from "@material-ui/icons/Home";
 import { ReactComponent as VideoGrapher } from "../../icons/videographer.svg";
 import { OpenContext } from "../../components/Context";
 import { useHistory } from "react-router-dom";
@@ -32,12 +32,11 @@ const AppB = () => {
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
-  /*const handleClearTextClick = (event) => {
-      setSearchText("");
-    };*/
 
   function handleSearchTextClick() {
-    history.push(`/results?movieName=${searchText}`);
+    if (searchText) {
+      history.push(`/results?movieName=${searchText}`);
+    }
   }
 
   const handleDrawerOpen = () => {
@@ -49,8 +48,8 @@ const AppB = () => {
   };
 
   const goHome = () => {
-    history.push("/")
-  }
+    history.push("/");
+  };
 
   return (
     <>
@@ -84,27 +83,30 @@ const AppB = () => {
           <IconButton onClick={goHome} edge="start" color="inherit">
             <HomeIcon />
           </IconButton>
-          <TextField
-            className={classes.textFieldSearch}
-            value={searchText}
-            placeholder="Search a movie..."
-            onChange={handleSearchTextChange}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                handleSearchTextClick();
-              }
-            }}
-          />
-          <Button
-            className={classes.searchButton}
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={handleSearchTextClick}
-            startIcon={<SearchIcon />}
-          >
-            <Hidden smDown>Search</Hidden>
-          </Button>
+          <div className={classes.textFieldDiv}>
+            <TextField
+              value={searchText}
+              size="small"
+              variant="outlined"
+              placeholder="Search a movie..."
+              onChange={handleSearchTextChange}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSearchTextClick();
+                }
+              }}
+            />
+            <Button
+              className={classes.searchButton}
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={handleSearchTextClick}
+              startIcon={<SearchIcon />}
+            >
+              <Hidden smDown>Search</Hidden>
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer

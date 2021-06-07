@@ -6,7 +6,7 @@ import { OpenProvider } from "./components/Context";
 
 import Home from "./pages/Home";
 import Results from "./pages/Results";
-import MovieDetail from "./pages/MovieDetail";
+import ByGenre from "./pages/ByGenre";
 import AppBar from "./components/AppBar";
 
 const App = ({ store }) => (
@@ -17,7 +17,7 @@ const App = ({ store }) => (
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/results" component={Results} />
-          <Route exact path="/movie/:id" component={MovieDetail} />
+          <Route exact path="/genre/:id" component={ByGenre} />
         </div>
       </Router>
     </OpenProvider>
