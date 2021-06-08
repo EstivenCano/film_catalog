@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Movie Catalog",
+  "name": "Movie Catalog created by EstivenCano",
+  "description": "Web page for search and consult movie info using an API of The Movie Database",
   "icons": [
     {
       "src": "favicon.ico",

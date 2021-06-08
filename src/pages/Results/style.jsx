@@ -11,6 +11,14 @@ const useStyles = makeStyles((theme) => ({
     paddingInline: "10px",
     backgroundColor: theme.palette.background.paper,
   },
+  circularProgress: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: theme.palette.background.paper,
+    height: "80vh",
+  },
   content: {
     flexGrow: 1,
     marginTop: 70,
@@ -49,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "#3f51b5",
     },
+    width: '100%',
   },
   title: {
     color: theme.palette.primary,
   },
-  titleBar: {},
 }));
 
 export default useStyles;

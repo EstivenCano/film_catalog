@@ -10,9 +10,10 @@ import {
 } from "@material-ui/core";
 import MovieDetail from "../../pages/MovieDetail";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import useStyles from "./style";
 import { OpenContext } from "../../components/Context";
+import Pagination from "@material-ui/lab/Pagination";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -28,11 +29,27 @@ const ByGenre = () => {
   const [movies, setMovies] = useState();
   const genre = useParams();
   const history = useHistory();
+  const [page, setPage] = React.useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   async function getMovies() {
     await axios
       .get(
         `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genre.id}`
+      )
+      .then((movies) => {
+        setMovies(movies.data.results);
+        setTotalPages(movies.data.total_pages);
+      })
+      .catch((err) => {
+        console.log("Error" + err);
+      });
+  }
+
+  async function updateMovies() {
+    await axios
+      .get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genre.id}&page=${page}`
       )
       .then((movies) => {
         setMovies(movies.data.results);
@@ -42,13 +59,7 @@ const ByGenre = () => {
       });
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    /*if (!movies) {
-      getMovies();
-      setCols(getViewport());
-    }*/
-    console.log("Entro");
     window.addEventListener(
       "resize",
       function () {
@@ -56,20 +67,34 @@ const ByGenre = () => {
       },
       true
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   useEffect(() => {
     getMovies();
-    setCols(getViewport());
+    setPage(1);
+    if (!movies) {
+      setCols(getViewport());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history.location.pathname]);
+
+  useEffect(() => {
+    if (page >= 1) {
+      updateMovies();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const handleAddClick = () => {
     setIsOpen(true);
   };
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
   function getViewport() {
@@ -87,7 +112,7 @@ const ByGenre = () => {
   const renderMovies = () => {
     if (movies) {
       return (
-        <AnimatePresence>
+        <>
           <Grid className={classes.root}>
             <GridList className={classes.gridList} cols={cols}>
               {movies.map((movie, index) => (
@@ -104,7 +129,7 @@ const ByGenre = () => {
                     >
                       {movie.poster_path ? (
                         <img
-                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                           alt={movie.title}
                           width="100%"
                         />
@@ -145,11 +170,24 @@ const ByGenre = () => {
               ))}
             </GridList>
           </Grid>
-        </AnimatePresence>
+
+          {page >= 1 ? (
+            <Grid container className={classes.paginationGrid}>
+              <Pagination
+                count={totalPages}
+                color="primary"
+                page={page}
+                onChange={handleChange}
+              />
+            </Grid>
+          ) : (
+            <></>
+          )}
+        </>
       );
     } else {
       return (
-        <Grid className={classes.root}>
+        <Grid className={classes.circularProgress}>
           <CircularProgress size={100} color="primary" />
         </Grid>
       );

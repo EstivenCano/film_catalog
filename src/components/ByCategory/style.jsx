@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
       color: theme.palette.primary,
     },
+    image:{
+      maxWidth: "100%",
+    },
     titleBar: {},
   }));
 

@@ -14,7 +14,7 @@ import axios from "axios";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 const ByCategory = (props) => {
-  const img = "https://image.tmdb.org/t/p/w500";
+  const img = "https://image.tmdb.org/t/p/w400";
   const apiKey = process.env.REACT_APP_API_KEY;
   const classes = useStyles();
   const [movies, setMovies] = useState();
@@ -78,46 +78,53 @@ const ByCategory = (props) => {
       {!isBusy ? (
         <div className={classes.root}>
           {movies ? (
-            <GridList className={classes.gridList} cols={cols}>
-              {movies.map((movie) => (
-                <GridListTile key={movie.id} className={classes.image}>
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <img
-                      src={img + movie.poster_path}
-                      alt={movie.title}
-                      width="100%"
-                    />
-                  </motion.div>
-                  <GridListTileBar
-                    title={movie.title}
-                    classes={{
-                      root: classes.titleBar,
-                      title: classes.title,
-                    }}
-                    actionIcon={
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <IconButton
-                          aria-label={`open ${movies.title} details`}
-                          color="secondary"
-                          onClick={() => {
-                            handleAddClick();
-                            setMovieId(movie.id);
-                          }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              exit={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <GridList className={classes.gridList} cols={cols}>
+                {movies.map((movie) => (
+                  <GridListTile key={movie.id}>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <img
+                        className={classes.image}
+                        src={img + movie.poster_path}
+                        alt={movie.title}
+                      />
+                    </motion.div>
+                    <GridListTileBar
+                      title={movie.title}
+                      classes={{
+                        root: classes.titleBar,
+                        title: classes.title,
+                      }}
+                      actionIcon={
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                         >
-                          <OpenInNewIcon className={classes.title} />
-                        </IconButton>
-                      </motion.div>
-                    }
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
+                          <IconButton
+                            aria-label={`open ${movies.title} details`}
+                            color="secondary"
+                            onClick={() => {
+                              handleAddClick();
+                              setMovieId(movie.id);
+                            }}
+                          >
+                            <OpenInNewIcon className={classes.title} />
+                          </IconButton>
+                        </motion.div>
+                      }
+                    />
+                  </GridListTile>
+                ))}
+              </GridList>
+            </motion.div>
           ) : (
             <></>
           )}

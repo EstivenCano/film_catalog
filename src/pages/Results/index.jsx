@@ -15,7 +15,7 @@ import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 
 import { searchMovie } from "../../redux/actions/search";
 import { movieResults, isSearchLoading } from "../../redux/selectors";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import useStyles from "./style";
 import { OpenContext } from "../../components/Context";
 
@@ -61,6 +61,8 @@ export default ({ location }) => {
     setIsOpen(false);
   };
 
+
+
   function getViewport() {
     const width = Math.max(
       document.documentElement.clientWidth,
@@ -76,7 +78,6 @@ export default ({ location }) => {
   const renderMovies = () => {
     if (movies) {
       return (
-        <AnimatePresence>
           <Grid className={classes.root}>
             <GridList className={classes.gridList} cols={cols}>
               {movies.map((movie, index) => (
@@ -86,7 +87,6 @@ export default ({ location }) => {
                     exit={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
-                    
                   >
                     <motion.div
                       whileHover={{ scale: 1.1 }}
@@ -94,7 +94,8 @@ export default ({ location }) => {
                     >
                       {movie.poster_path ? (
                         <img
-                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          className="lazyload"
+                          src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
                           alt={movie.title}
                           width="100%"
                         />
@@ -135,11 +136,10 @@ export default ({ location }) => {
               ))}
             </GridList>
           </Grid>
-        </AnimatePresence>
       );
     } else if (isLoading) {
       return (
-        <Grid className={classes.root}>
+        <Grid className={classes.circularProgress}>
           <CircularProgress size={100} color="primary" />
         </Grid>
       );

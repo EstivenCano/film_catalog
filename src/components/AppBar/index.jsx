@@ -75,12 +75,18 @@ const AppB = () => {
             <IconButton
               onClick={handleDrawerClose}
               edge="start"
+              aria-label="close drawer"
               color="inherit"
             >
               <ChevronLeftIcon />
             </IconButton>
           )}
-          <IconButton onClick={goHome} edge="start" color="inherit">
+          <IconButton
+            onClick={goHome}
+            edge="start"
+            color="inherit"
+            aria-label="home"
+          >
             <HomeIcon />
           </IconButton>
           <div className={classes.textFieldDiv}>
@@ -101,6 +107,7 @@ const AppB = () => {
               variant="contained"
               color="primary"
               size="small"
+              aria-label="search"
               onClick={handleSearchTextClick}
               startIcon={<SearchIcon />}
             >

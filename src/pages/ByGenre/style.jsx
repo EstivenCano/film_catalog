@@ -11,6 +11,14 @@ const useStyles = makeStyles((theme) => ({
     paddingInline: "10px",
     backgroundColor: theme.palette.background.paper,
   },
+  circularProgress: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: theme.palette.background.paper,
+    height: "80vh",
+  },
   content: {
     flexGrow: 1,
     marginTop: 70,
@@ -53,7 +61,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary,
   },
-  titleBar: {},
+  paginationGrid: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop:'20px'
+  }
 }));
 
 export default useStyles;

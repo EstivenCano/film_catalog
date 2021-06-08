@@ -90,7 +90,7 @@ const MovieDetail = (props) => {
                     <Grid xs={12} md={7} item className={classes.gridImage}>
                       {movieResult.poster_path ? (
                         <img
-                          src={`https://image.tmdb.org/t/p/w500${movieResult.poster_path}`}
+                          src={`https://image.tmdb.org/t/p/w400${movieResult.poster_path}`}
                           alt={movieResult.title}
                           className={classes.image}
                         />
