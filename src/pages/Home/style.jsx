@@ -67,10 +67,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   title: {
-    fontSize: "25px",
+    fontSize: "22px",
     fontWeight: '500', 
     lineHeight: '40px',
-    textAlign: 'center'
+    marginLeft: '10px'
   },
   titleGridContainer: {
     ...centeredStyleObj,

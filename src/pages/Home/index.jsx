@@ -6,7 +6,10 @@ import { OpenContext } from "../../components/Context";
 
 import { motion } from "framer-motion";
 import useStyles from "./style";
-import ByCategory from "../../components/ByCategory";
+import loadable from '@loadable/component'
+
+//Code splitting
+const ByCategory = loadable(() => import('../../components/ByCategory'))
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
